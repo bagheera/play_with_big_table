@@ -1,0 +1,28 @@
+<html>
+<body>
+<table border="1">
+{% for teen in teens %}
+<tr>
+<td>
+  {{ teen.name }}
+</td>
+<td>
+  {{ teen.age }}
+</td>
+<td>
+  {{ teen.gender }}
+</td>
+<td>
+  {{ teen.guardian.id }}
+</td>
+<td>
+  {{ teen.guardian.num_daughters }}
+</td>
+<td>
+  {{ teen.guardian.num_sons }}
+</td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>

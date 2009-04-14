@@ -1,0 +1,10 @@
+<html>
+<body>
+<table border="1">
+{{ header }}
+{% for item in items %}
+  {{ item.get_row }}
+{% endfor %}
+</table>
+</body>
+</html>

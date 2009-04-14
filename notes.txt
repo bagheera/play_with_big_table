@@ -1,0 +1,27 @@
+Looks like ListProperty cannot have custom types
+
+try this:
+Consider this:
+
+Employee has zero/more children
+I want to model so that the following queries are optimised:
+Find all employees having 2 teenage daughters.
+
+As I understand, there are broadly two ways of modeling this One way is to make each child refer to its parent-employee.
+
+class Employee(db.Model):
+  num_daughters = db.IntegerProperty()
+  num_sons = db.IntegerProperty()
+
+class Child(db.Model):
+  name = db.StringProperty()
+  gender = db.StringProperty()
+  age = db.IntegerProperty()
+  parent = db.ReferenceProperty(Employee, collection_name="children")
+
+and then do:
+   select * from employee where num_daughters = 2
+followed by 
+   select * from child where age > 12 and age < 20 and parent IN :1 #(bind to a list of max 30 employees)
+
+The second way is to simulate a List of children by defining 
